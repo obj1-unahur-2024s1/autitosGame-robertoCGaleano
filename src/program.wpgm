@@ -1,0 +1,17 @@
+//ejercicio wollok game en archivo program
+
+import wollok.game.*
+import auto.*                              //importamos la libreria donde esta el objeto auto
+
+program miPrimerWollokGame {
+    game.width(14)                          // le damos un tamaño al tablero
+	game.height(8)
+    game.boardGround("empedrado.jpg")       // agrega un fondo al tablero
+    game.addVisual(auto)                    //muestra el objeto auto en el tablero
+    //movemos al auto en el tablero
+    //en program juego
+    keyboard.right().onPressDo{auto.moverseALaDerecha()}
+
+
+    game.start()
+}
