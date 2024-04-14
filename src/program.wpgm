@@ -2,16 +2,30 @@
 
 import wollok.game.*
 import auto.*                              //importamos la libreria donde esta el objeto auto
+import pared.*
 
 program miPrimerWollokGame {
-    game.width(14)                          // le damos un tamaño al tablero
-	game.height(8)
-    game.boardGround("empedrado.jpg")       // agrega un fondo al tablero
+	// límites del tablero de juego
+    game.width(14)                          // le damos ancho al tablero
+	game.height(8)							// le damos alto al tablero
+	// fondo del tablero de juego			
+    game.boardGround("empedrado.jpg")       // agrega imagen de fondo al tablero
+    // agregamos a nuestro objeto auto
     game.addVisual(auto)                    //muestra el objeto auto en el tablero
     //movemos al auto en el tablero
-    //en program juego
+    //le asignamos al teclado que justo al presionar derecha realice "auto.moverseALaDerecha" 
     keyboard.right().onPressDo{auto.moverseALaDerecha()}
-
-
-    game.start()
+    //le asignamos al teclado que justo al presionar izquierda realice "auto.moverseALaDerecha"
+    keyboard.left().onPressDo{auto.moverseALaIzquierda()}
+    //le asignamos al teclado que justo al presionar up realice "auto.moverseArriba"
+    keyboard.up().onPressDo{auto.moverseArriba()}
+    //le asignamos al teclado que justo al presionar down realice "auto.moverseAbajo"
+    keyboard.down().onPressDo{auto.moverseAbajo()}
+    // agregamos a nuestros objetos pared....
+	game.addVisual(pared)
+	game.addVisual(pared2)
+	game.addVisual(pared3)
+	game.addVisual(pared4)
+	// que arranque el juego!
+    game.start()							//siempre debe ir al final del codigo
 }
