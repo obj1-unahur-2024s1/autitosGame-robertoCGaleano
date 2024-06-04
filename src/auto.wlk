@@ -56,4 +56,7 @@ object auto {
 		vida -=1
 		if (vida == 0){game.addVisual(gameOver)}
 	}
+	method sumarVida(){
+		vida+= 1
+	}
 }

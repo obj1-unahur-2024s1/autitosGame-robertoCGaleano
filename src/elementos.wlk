@@ -18,6 +18,10 @@ class Elemento {
     	const nuevoY= (position.y()+1) % altura			//le sumo 1 a la posicion del eje y, y me fijo si esta en la ultima posicion le doy el valor 0 
 	    position = game.at(self.position().x(), nuevoY)	//guardo en la var position la nueva posicion
     }
+    
+    method chocar(){
+		game.say(self,"vuelve a la carretera")
+	}
 	method iniciar(){
 		game.onTick(velocidad,"elemento1",{self.moverseAbajo()})
 	}
@@ -47,14 +51,18 @@ class Referencia inherits Elemento{
 	override method iniciar(){
 		game.onTick(velocidad,"elemento1",{self.moverseArriba()})
 	}
+	//method mostrarLlegada(){
+		//if(position.y()==7)game.boardGround("fondoLlegada.png")
+	//}
 }
 
 class Fuel inherits Elemento{
 	// definimos la imagen 
 
 	method image()= "vida.png"
-	method chocar(){
+	override method chocar(){
 		game.removeVisual(self)
+		auto.sumarVida()
 	}
 }
 
@@ -80,3 +88,12 @@ object gameOver {
 	
 	method text() = "GAME OVER"
 }
+class Bandera {
+	const position
+	var image
+	
+	method image()= image
+	method position()= position
+	
+}
+
