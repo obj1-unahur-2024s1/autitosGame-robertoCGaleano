@@ -1,0 +1,9 @@
+//ejercicio wollok game en archivo program
+import configuracion.*
+import wollok.game.*                           
+
+program miPrimerWollokGame {
+    
+    juego.play()
+	// que arranque el juego!
+}

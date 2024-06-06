@@ -1,36 +1,31 @@
-import elementos.*
-import vehiculos.*
-import auto.*
 import wollok.game.*
+import elementos.*
+import fondos.*
+import auto.*
+import vehiculos.*
 
-object juego {
-	
-	method play(){
-	
-		self.configurarPantalla()
-	
-		game.start()
-	}
-	
-	method configurarPantalla(){
+
+object level1{
+
+	method configurarPantallaLevel1(){
+		//sacamos el object mano
+		game.removeVisual(mano)
+		//configuramos fondo del juego en level 1
+		fondo.cambiarFondo("fondo2.png")
 		
-		game.title("Autitos game")
-		// límites del tablero de juego
-    	game.width(14)                          // le damos ancho al tablero
-		game.height(8)							// le damos alto al tablero
-		// fondo
-		game.boardGround("fondo.png")       		// agrega imagen de fondo al tablero
-		
-    	// Iniciamos los personajes
+    	// Iniciamos los personajes de level1
 		self.posicionarAutosEnemigos()
 		self.posicionarElementos()
 		self.posicionarAuto()
 		self.posicionarBanderas()
-		
+		self.iniciarFuel()
+		self.iniciarVidas()
+		//agregamos a pepita como invitada
+		game.addVisual(pepita)
+		game.onTick(10000, "sale pepita",{pepita.salir()})
 	}
 	
-	method posicionarAutosEnemigos(){
-		
+	method posicionarAutosEnemigos(){	
 		const enemigo1 = new AutoRojo( position = game.at(4,6))
 		const enemigo2 = new Camion( position = game.at(3,7))
 		const enemigo3 = new AutoAmarillo( position = game.at(6,5))
@@ -57,7 +52,7 @@ object juego {
 		
 		elementos.forEach{elemento => game.addVisual(elemento)}
 		elementos.forEach{elemento => elemento.iniciar()}
-		//elemento7.mostrarLlegada()
+		//elemento7.mostrarLlegada()  //falta metodo en elemento referencia que deberia de mostrar la llegada
 	}
 	
 	method posicionarAuto(){
@@ -78,5 +73,17 @@ object juego {
 		game.addVisual(bandera1)
 		game.addVisual(bandera2)
 	}
+	
+	method iniciarFuel(){
+		game.addVisual(medidorFuel)
+		medidorFuel.animacionFuel()
+	}
+	
+	method iniciarVidas(){
+		const vidas = [vida1, vida2, vida3, vida4]
+		vidas.forEach{vida => game.addVisual(vida)}
+		
+	}
+	
 	
 }

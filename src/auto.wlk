@@ -1,10 +1,13 @@
 import wollok.game.*
 import elementos.*
+import level1.*
+import configuracion.*
 
 object auto {
 	
-	var property vida= 3
+	var property vida= 5
 	var position = game.at(3,1)
+	
 	//variables para las animaciones
 	const imgDerecha = ["auto1.png", "auto2.png","auto3.png","auto4.png","auto1.png"]
 	const imgIzquierda = ["auto1.png","auto5.png","auto6.png","auto7.png","auto1.png"]
@@ -14,6 +17,7 @@ object auto {
 	method position()= position
 	
 	//metodos en auto para moverse una posicion x sin salir del tablero
+	
     method moverseALaDerecha(){
     	const ancho= game.width()					//guardo en una var el ancho del tablero
     	const nuevoX= (position.x()+1) % ancho	//le sumo 1 a la posicion del eje X, y me fijo si esta en la ultima posicion le doy el valor 0 
@@ -40,6 +44,7 @@ object auto {
     //metodo para animacion al colisionar
     method animacionDerrape(){ // Animacion itera sobre la lista de imagenes y cambia el visual cada X tiempo
 		var i = 0
+		//si el eje X es mayor a 5 derrapa hacia la derecha sino para la izquierda.
 		if (position.x() > 5) {game.onTick(200,"derrape",{self.image(imgDerecha.get(i%5)) i+=1})}
 		else {game.onTick(200,"derrape",{self.image(imgIzquierda.get(i%5)) i+=1})}
 	}
@@ -51,12 +56,16 @@ object auto {
     method chocar(){
     	self.animacionDerrape()
     	self.eliminar(1300, "derrape")
-		game.say(self,"conduce mejor")
+		//al colisionar si el eje X es mayor se mueve a la derecha sino para la izquierda.
 		if (position.x() > 5) self.moverseALaDerecha() else self.moverseALaIzquierda()
-		vida -=1
-		if (vida == 0){game.addVisual(gameOver)}
+		//pierde una vida
+		vida = vida-1
+		if (vida == 0) game.addVisual(gameOver)
+		//delego a juego para que actualice vidas del tablero
+		juego.actualizarVidas()
 	}
+	
 	method sumarVida(){
-		vida+= 1
+		vida= 5.min(vida + 1)
 	}
 }
