@@ -2,6 +2,7 @@ import elementos.*
 import fondos.*
 import wollok.game.*
 import level1.*
+import level2.*
 import auto.*
 
 object juego {
@@ -23,7 +24,7 @@ object juego {
 		keyboard.up().onPressDo{mano.moverseArriba()}
 		keyboard.down().onPressDo{mano.moverseAbajo()}
 		//asignamos level 1 0 2 segun la posicion de mano
-		keyboard.enter().onPressDo{ if (mano.level()==1) level1.configurarPantallaLevel1() else self.pantallaInicial()}//falta agregar leve2 momentaneamente pantallaInicial()
+		keyboard.enter().onPressDo{ if (mano.level()==1) level1.configurarPantallaLevel1() else level2.configurarPantallaLevel2()}
 		
 	}
 	

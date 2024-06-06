@@ -4,7 +4,7 @@ import auto.*
 
 class Vehiculo {
 	// definimos los atributos para velocidad y posición
-	const velocidad = 350
+	var velocidad = 350
 	var position 
 
 	method position()= position

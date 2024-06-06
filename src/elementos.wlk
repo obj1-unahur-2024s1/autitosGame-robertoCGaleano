@@ -151,7 +151,7 @@ object medidorFuel{
 	method animacionFuel(){
 		var i= 0
 		// si el nivel de fuel llega a 0 se detiene el juego. Se podria agregar una pantalla game over.
-		game.onTick(6000,"bajaFuel",{self.image(img.get(i%6)) i+=1  if (self.image()== "barraNafta0.png") {game.stop()}} )
+		game.onTick(6000,"bajaFuel",{self.image(img.get(i%6)) i+=1  if (self.image()== "barraNafta0.png") game.addVisual(gameOver) } )//o {game.stop()}} )
 		
 	}
 }
